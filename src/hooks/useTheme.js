@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
+import { createElement } from 'react';
 
 const ThemeContext = createContext({ dark: false, toggle: () => { } });
 
@@ -20,11 +21,7 @@ export function ThemeProvider({ children }) {
 
     const toggle = () => setDark(d => !d);
 
-    return (
-        <ThemeContext.Provider value={{ dark, toggle }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+    return createElement(ThemeContext.Provider, { value: { dark, toggle } }, children);
 }
 
 export const useTheme = () => useContext(ThemeContext);
